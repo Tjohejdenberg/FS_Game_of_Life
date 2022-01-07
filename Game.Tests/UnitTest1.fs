@@ -29,23 +29,68 @@ let Test_CreateRectangularBoard () =
 
 [<Test>]
 let Test_GetNeighboursOfLoneCell () =
-    let CellAlive = (1,1)
+    let cellAlive = (1,1)
     let expected = [
         (0,0);(1,0);(2,0)
         (0,1);      (2,1)
         (0,2);(1,2);(2,2)
     ]
-    let actual = GetNeighours CellAlive
+    let actual = GetNeighbours cellAlive
     Assert.That(actual, Is.EqualTo(expected)) 
 
 [<Test>]
 let Test_GetNeighboursOfLoneCell2 () =
-    let CellAlive = (0,-3)
+    let cellAlive = (0,-3)
     let expected = [
         (-1,-4);(0,-4);(1,-4)
         (-1,-3);      (1,-3)
         (-1,-2);(0,-2);(1,-2)
     ]
-    let actual = GetNeighours CellAlive
+    let actual = GetNeighbours cellAlive
     Assert.That(actual, Is.EqualTo(expected)) 
    
+
+[<Test>]
+let Test_GetNeighboursOfCellOnEdgeOfBoard () =
+    let board = CreateBoard 3 3
+    let cellAlive = (2,0)
+    let expected = [
+        (1,0);
+        (1,1);(2,1)
+    ]
+    let actual = GetNeighboursOnBoard cellAlive board
+    Assert.That(actual, Is.EqualTo(expected))   
+
+[<Test>]
+let Test_GetNeighboursOfCellOnEdgeOfBoard2 () =
+    let board = CreateBoard 3 3
+    let cellAlive = (0,0)
+    let expected = [
+        (1,0);
+        (0,1);(1,1)
+    ]
+    let actual = GetNeighboursOnBoard cellAlive board
+    Assert.That(actual, Is.EqualTo(expected))   
+
+[<Test>]
+let Test_GetNeighboursOfCellOnEdgeOfBoard3 () =
+    let board = CreateBoard 3 3
+    let cellAlive = (2,1)
+    let expected = [
+        (1,0);(2,0)
+        (1,1);
+        (1,2);(2,2)
+    ]
+    let actual = GetNeighboursOnBoard cellAlive board
+    Assert.That(actual, Is.EqualTo(expected))  
+
+[<Test>]
+let Test_GetNeighboursOfCellOnEdgeOfBoard4 () =
+    let board = CreateBoard 3 3
+    let cellAlive = (1,2)
+    let expected = [
+        (0,1);(1,1);(2,1)
+        (0,2);      (2,2)
+    ]
+    let actual = GetNeighboursOnBoard cellAlive board
+    Assert.That(actual, Is.EqualTo(expected))  
