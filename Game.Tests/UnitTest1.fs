@@ -58,7 +58,7 @@ let Test_GetNeighboursOfCellOnEdgeOfBoard () =
         (1,0);
         (1,1);(2,1)
     ]
-    let actual = GetNeighboursOnBoard cellAlive board
+    let actual = GetNeighboursOnBoard board cellAlive 
     Assert.That(actual, Is.EqualTo(expected))   
 
 [<Test>]
@@ -69,7 +69,7 @@ let Test_GetNeighboursOfCellOnEdgeOfBoard2 () =
         (1,0);
         (0,1);(1,1)
     ]
-    let actual = GetNeighboursOnBoard cellAlive board
+    let actual = GetNeighboursOnBoard board cellAlive 
     Assert.That(actual, Is.EqualTo(expected))   
 
 [<Test>]
@@ -81,7 +81,7 @@ let Test_GetNeighboursOfCellOnEdgeOfBoard3 () =
         (1,1);
         (1,2);(2,2)
     ]
-    let actual = GetNeighboursOnBoard cellAlive board
+    let actual = GetNeighboursOnBoard board cellAlive 
     Assert.That(actual, Is.EqualTo(expected))  
 
 [<Test>]
@@ -92,5 +92,42 @@ let Test_GetNeighboursOfCellOnEdgeOfBoard4 () =
         (0,1);(1,1);(2,1)
         (0,2);      (2,2)
     ]
-    let actual = GetNeighboursOnBoard cellAlive board
+    let actual = GetNeighboursOnBoard board cellAlive 
     Assert.That(actual, Is.EqualTo(expected))  
+
+[<Test>]
+let Test_GetNeighboursForPointCount () =
+    let board = CreateBoard 3 3
+    let cellsAlive = [(0,0);(1,0)]
+    let expected = [
+        (1,0)
+        (0,1)
+        (1,1)
+        (0,0)
+        (2,0)
+        (0,1)
+        (1,1)
+        (2,1)
+    ]
+    let actual = generateStackedOccurencesOfNeighbourCells board cellsAlive 
+    Assert.That(actual, Is.EqualTo(expected)) 
+
+[<Test>]
+let Test_GetNeighboursForPointCount2 () =
+    let board = CreateBoard 3 3
+    let cellsAlive = [(0,0);(1,0);(0,2)]
+    let expected = [
+        (1,0)
+        (0,1)
+        (1,1)
+        (0,0)
+        (2,0)
+        (0,1)
+        (1,1)
+        (2,1)
+        (0,1)
+        (1,1)
+        (1,2)
+    ]
+    let actual = generateStackedOccurencesOfNeighbourCells board cellsAlive 
+    Assert.That(actual, Is.EqualTo(expected))

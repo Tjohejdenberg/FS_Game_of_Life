@@ -20,5 +20,8 @@ let GetNeighbours cellAlive =
     CreateCoordinateList (x-1) (x+1) (y-1) (y+1) 
     |> List.filter (fun x -> x <> cellAlive)
     
-let GetNeighboursOnBoard cellAlive board =
+let GetNeighboursOnBoard board cellAlive =
     GetNeighbours cellAlive |> GetCellsWithinCoordinateRange board
+
+let generateStackedOccurencesOfNeighbourCells board livingCells = 
+    livingCells |> List.map (GetNeighboursOnBoard board) |> List.concat
