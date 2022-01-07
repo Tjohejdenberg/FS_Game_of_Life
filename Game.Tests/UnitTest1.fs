@@ -26,10 +26,10 @@ let Test_CreateRectangularBoard () =
     ]
     let actual = CreateBoard 3 4
     Assert.That(actual, Is.EqualTo(expected))
-(*
+
 [<Test>]
 let Test_GetNeighboursOfLoneCell () =
-    let CellAlive = [(1,1)]
+    let CellAlive = (1,1)
     let expected = [
         (0,0);(1,0);(2,0)
         (0,1);      (2,1)
@@ -37,5 +37,15 @@ let Test_GetNeighboursOfLoneCell () =
     ]
     let actual = GetNeighours CellAlive
     Assert.That(actual, Is.EqualTo(expected)) 
-*)
+
+[<Test>]
+let Test_GetNeighboursOfLoneCell2 () =
+    let CellAlive = (0,-3)
+    let expected = [
+        (-1,-4);(0,-4);(1,-4)
+        (-1,-3);      (1,-3)
+        (-1,-2);(0,-2);(1,-2)
+    ]
+    let actual = GetNeighours CellAlive
+    Assert.That(actual, Is.EqualTo(expected)) 
    
