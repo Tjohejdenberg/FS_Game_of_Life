@@ -131,3 +131,76 @@ let Test_GetNeighboursForPointCount2 () =
     ]
     let actual = generateStackedOccurencesOfNeighbourCells board cellsAlive 
     Assert.That(actual, Is.EqualTo(expected))
+
+[<Test>]
+let Test_GetNeighboursForPointCount3 () =
+    let board = CreateBoard 3 3
+    let cellsAlive = [(0,1);(2,1)]
+    let expected = [
+        (0,0)
+        (1,0)
+        (1,1)
+        (0,2)
+        (1,2)
+        (1,0)
+        (2,0)
+        (1,1)
+        (1,2)
+        (2,2)
+    ]
+    let actual = generateStackedOccurencesOfNeighbourCells board cellsAlive 
+    Assert.That(actual, Is.EqualTo(expected))
+
+[<Test>]
+let Test_GetNeighboursForPointCount_LiveCellsNextToEach () =
+    let board = CreateBoard 3 3
+    let cellsAlive = [(0,1);(1,1)]
+    let expected = [
+        (0,0)
+        (1,0)
+        (1,1)
+        (0,2)
+        (1,2)
+        (0,0)
+        (1,0)
+        (2,0)
+        (0,1)
+        (2,1)
+        (0,2)
+        (1,2)
+        (2,2)
+    ]
+    let actual = generateStackedOccurencesOfNeighbourCells board cellsAlive 
+    Assert.That(actual, Is.EqualTo(expected))
+
+[<Test>]
+let Test_GetCellsToBeBornNextRound () =
+    let board = CreateBoard 3 3
+    let cellsAlive = [(0,1);(1,1);(2,1)]
+    let expected = [(1,0);(1,2)]
+    let actual = listCellsToBeBorn board cellsAlive 
+    Assert.That(actual, Is.EqualTo(expected))
+
+[<Test>]
+let Test_GetCellsToBeBornNextRound2 () =
+    let board = CreateBoard 3 3
+    let cellsAlive = [(2,0);(0,1);(1,1);(0,2);(2,2)]
+    let expected = [(1,0);(2,1)]
+    let actual = listCellsToBeBorn board cellsAlive 
+    Assert.That(actual, Is.EqualTo(expected))
+
+[<Test>]
+let Test_GetCellsToKeepAliveNextRound () =
+    let board = CreateBoard 3 3
+    let cellsAlive = [(2,0);(0,1);(1,1);(0,2);(2,2)]
+    let expected = [(0,1);(0,2)]
+    let actual = listCellsToKeepAlive board cellsAlive 
+    Assert.That(actual, Is.EqualTo(expected))
+
+[<Test>]
+let Test_GetCellsToKeepAliveNextRound2 () =
+    let board = CreateBoard 3 3
+    let cellsAlive = [(0,0);(1,1);(2,1)]
+    let expected = [(1,1)]
+    let actual = listCellsToKeepAlive board cellsAlive 
+    Assert.That(actual, Is.EqualTo(expected))
